@@ -1,4 +1,5 @@
-.cards .catd {
+.cards .card {
+  border: 1px solid #EEE;
   background: #FFF;
 }
 
@@ -15,8 +16,17 @@
   left: 0px;
   bottom: 0px;
   right: 0px;
+  max-width: 800px;
   width: 100%;
   height: 100%;
+  margin: auto;
   padding: 10px;
   background: #FFF;
+}
+
+.selectedCard .contents .content {
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #212121;
+  font-size: 18px;
 }

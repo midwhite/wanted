@@ -30,3 +30,19 @@
   border: 1px solid #212121;
   font-size: 18px;
 }
+
+#registrationForm caption {
+  background: #666;
+  color: #FFF;
+  text-indent: 1em;
+}
+
+#registrationForm th {
+  width: 100px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+#registrationForm label {
+  margin: 0px;
+}

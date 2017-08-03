@@ -1,3 +1,12 @@
+a {
+  color: #212121;
+}
+
+a:hover {
+  color: #212121;
+  text-decoration: none;
+}
+
 .cards .card {
   border: 1px solid #EEE;
   background: #FFF;
@@ -45,4 +54,20 @@
 
 #registrationForm label {
   margin: 0px;
+}
+
+#home {
+  padding: 10px;
+  background: #FFF3E0;
+}
+
+#home .facebookLoginButton {
+  width: 250px;
+  height: 50px;
+  margin: 20px auto;
+  text-align: center;
+}
+
+#home .fbLoginButton {
+  box-shadow: 1px 1px 1px rgba(0,0,0,.5);
 }

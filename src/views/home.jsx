@@ -1,6 +1,8 @@
 import React from 'react';
 import FacebookLogin from 'react-facebook-login';
 
+import Constants from '../constants';
+
 export default class Home extends React.Component {
   render(){
     return(
@@ -16,7 +18,7 @@ export default class Home extends React.Component {
           margin: "auto"
         }}>
           <FacebookLogin
-            appId="121398381830440"
+            appId={Constants.fbAppId}
             autoLoad={false}
             callback={this.props.signIn}
             icon="fa-facebook"

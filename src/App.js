@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
 import './App.css';
 
@@ -16,27 +16,24 @@ class App extends Component {
     }
   }
   signIn(response){
-    console.log(response);
-    this.setState({ signedIn: true, user: response });
-    window.location.pathname = "/wanted/cards";
+    if(response.id){
+      this.setState({ signedIn: true, user: response });
+    }
   }
   render(){
     if(this.state.signedIn){
       return(
         <div>
-          <BrowserRouter>
-            <div id="router">
-              <Switch>
-                <Route path="/wanted/cards" render={(props)=>{
-                  return <Cards currentUser={this.state.user} history={props.history} match={props.match} />;
-                }} />
-                <Route path="/wanted/users" render={(props)=>{
-                  return <Registration currentUser={this.state.user} history={props.history} match={props.match} />;
-                }} />
-                <Route component={Home} />
-              </Switch>
-            </div>
-          </BrowserRouter>
+          <div id="router">
+            <Switch>
+              <Route path="/wanted/users" render={(props)=>{
+                return <Registration currentUser={this.state.user} history={props.history} match={props.match} />;
+              }} />
+              <Route render={(props)=>{
+                return <Cards currentUser={this.state.user} history={props.history} match={props.match} />;
+              }} />
+            </Switch>
+          </div>
         </div>
       );
     } else {

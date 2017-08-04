@@ -82,7 +82,7 @@ export default class Cards extends React.Component {
       });
       this.setState({ selectedCards: newIds });
     }
-    this.props.history.push("/wanted/cards");
+    this.props.history.push("/wanted");
   }
   render(){
     return(
@@ -146,7 +146,7 @@ class CardDetail extends React.Component {
         <div className="row">
           <div className="col-xs-12">
             <div>
-              <Link to="/wanted/cards" className="close" aria-label="Close">
+              <Link to="/wanted" className="close" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </Link>
             </div>

@@ -10,7 +10,7 @@ export default class Registration extends React.Component {
     const xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function(){
       if(xhr.readyState === 4){
-        this.props.history.push("/wanted/cards");
+        this.props.history.push("/wanted");
       }
     }.bind(this)
     xhr.open("POST", e.target.action, true);
@@ -117,7 +117,7 @@ export default class Registration extends React.Component {
               <input type="hidden" name="uid"      value={this.props.currentUser.id} id="uid" />
               <button className="btn btn-danger form-control">登録！</button>
             </form>
-            <Link to="/wanted/cards" className="btn btn-default form-control" style={{margin: "15px 0px"}}>戻る</Link>
+            <Link to="/wanted" className="btn btn-default form-control" style={{margin: "15px 0px"}}>戻る</Link>
           </div>
         </div>
       </div>

@@ -3,6 +3,8 @@ import { Switch, Route } from 'react-router-dom';
 
 import './App.css';
 
+import Constants from './constants';
+
 import Home  from './views/home';
 import Cards from './views/cards';
 import Registration from './views/registration';
@@ -17,7 +19,15 @@ class App extends Component {
   }
   signIn(response){
     if(response.id){
-      this.setState({ signedIn: true, user: response });
+      const xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function(){
+        if(xhr.readyState === 4){
+          const currentUser = JSON.parse(xhr.responseText);
+          this.setState({ signedIn: true, currentUser: currentUser });
+        }
+      }.bind(this);
+      xhr.open("GET", `${Constants.apiDomain}/cards/${response.id}?event_id=${Constants.eventId}`, true);
+      xhr.send();
     }
   }
   render(){
@@ -27,10 +37,10 @@ class App extends Component {
           <div id="router">
             <Switch>
               <Route path="/wanted/users" render={(props)=>{
-                return <Registration currentUser={this.state.user} history={props.history} match={props.match} />;
+                return <Registration currentUser={this.state.currentUser} history={props.history} match={props.match} />;
               }} />
               <Route render={(props)=>{
-                return <Cards currentUser={this.state.user} history={props.history} match={props.match} />;
+                return <Cards currentUser={this.state.currentUser} history={props.history} match={props.match} />;
               }} />
             </Switch>
           </div>

@@ -9,7 +9,8 @@ export default class Cards extends React.Component {
 
     this.state = {
       cards: [],
-      selectedCards: []
+      selectedCards: [],
+      hasOwnCard: false
     };
   }
   componentDidMount(){
@@ -18,51 +19,12 @@ export default class Cards extends React.Component {
       if(xhr.readyState === 4){
         const response = JSON.parse(xhr.responseText);
         if(response.cards.length > 0){
-          this.setState({ cards: response.cards });
-        } else {
-          this.setState({
-            cards: [{
-              id: 1,
-              name: "Hiroki",
-              age: 26,
-              contents: [
-                "勉強が好きすぎて大学に5年間通った。",
-                "彼女が欲しすぎて出会い系サイトを開発してしまった。",
-                "一部ではかいちょーと呼ばれている。"
-              ],
-              tags: ["広告", "エンジニア", "経済"]
-            },{
-              id: 2,
-              name: "Hiroshi",
-              age: 28,
-              contents: [
-                "勉強が好きすぎて大学に5年間通った。",
-                "彼女が欲しすぎて出会い系サイトを開発してしまった。",
-                "一部ではかいちょーと呼ばれている。"
-              ],
-              tags: ["コンサル", "教育", "東大"]
-            },{
-              id: 3,
-              name: "Shiho",
-              age: 24,
-              contents: [
-                "勉強が好きすぎて大学に5年間通った。",
-                "彼女が欲しすぎて出会い系サイトを開発してしまった。",
-                "一部ではかいちょーと呼ばれている。"
-              ],
-              tags: ["大学院生", "社会学", "林業"]
-            },{
-              id: 4,
-              name: "にしやん",
-              age: 26,
-              contents: [
-                "勉強が好きすぎて大学に5年間通った。",
-                "彼女が欲しすぎて出会い系サイトを開発してしまった。",
-                "一部ではかいちょーと呼ばれている。"
-              ],
-              tags: ["読書会", "映画祭", "関西弁"]
-            }]
-          });
+          const hasOwnCard = response.cards.some(card => { return card.user_id === this.props.currentUser.user_id; });
+          if(hasOwnCard){
+            this.setState({ cards: response.cards, hasOwnCard: hasOwnCard });
+          } else {
+            this.props.history.push("/wanted/users");
+          }
         }
       }
     }.bind(this);
@@ -120,7 +82,7 @@ export default class Cards extends React.Component {
         </div>
         <div className="row" style={{marginTop: 40}}>
           <div className="col-sm-12" style={{textAlign: "right"}}>
-            <Link to="/wanted/users" className="btn btn-danger">登録する</Link>
+            <Link to="/wanted/users" className="btn btn-danger">カードを書き直す</Link>
           </div>
         </div>
         <Route path="/wanted/cards/:cardId" render={(props)=>{
